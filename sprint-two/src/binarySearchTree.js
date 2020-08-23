@@ -88,9 +88,16 @@ searchMethod.contains = function(value) {
       contained = true;
       return true;
     }
+
     if (currNode.children) {
-      for (var i = 0; i < currNode.children.length; i++) {
-        iterateNodes(currNode.children[i]);
+      if (currNode.value > value) {
+        if (currNode.leftChild) {
+          iterateNodes(currNode.leftChild);
+        }
+      } else {
+        if (currNode.rightChild) {
+          iterateNodes(currNode.rightChild);
+        }
       }
     }
     return contained;
@@ -117,4 +124,7 @@ searchMethod.depthFirstLog = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert: O (log n)
+ contains: O (log n)
+ depthFirstLog: O (n)
  */
